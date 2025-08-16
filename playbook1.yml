@@ -1,7 +1,7 @@
 ---
--hosts: ubuntu
- become: true
- tasks:
+- hosts: ubuntu
+  become: true
+  tasks:
   - name: install apache2
     ansible.builtin.apt:
       name: apache2 

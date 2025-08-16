@@ -1,0 +1,14 @@
+---
+- hosts: ubuntu
+  become: true
+  tasks:
+    - name: uninstall apache2
+      ansible.builtin.apt:
+        name: apache2
+        state: absent
+        purge: yes
+        autoremove: yes
+    - name: remove index.html
+      ansible.builtin.file:
+        path: /var/www/html/index.html
+        state: absent

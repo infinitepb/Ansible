@@ -9,7 +9,7 @@
       update_cache: yes
   - name: copy index.html
     ansible.builtin.copy:
-      src: /home/Prati/Documents/Ansible/index.html
+      src: /home/ubuntu/Ansible/index.html
       dest: /var/www/html/index.html
       owner: root
       group: root 

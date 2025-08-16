@@ -2,10 +2,31 @@
 - hosts: ubuntu
   become: true
   tasks:
+
     - name: Stop Docker service
       service:
         name: docker
         state: stopped
+        enabled: no
+      ignore_errors: yes
+
+    - name: Stop and disable containerd service
+      service:
+        name: containerd
+        state: stopped
+        enabled: no
+      ignore_errors: yes
+
+    - name: Mask Docker service to prevent restart
+      systemd:
+        name: docker
+        masked: yes
+      ignore_errors: yes
+
+    - name: Mask containerd service to prevent restart
+      systemd:
+        name: containerd
+        masked: yes
       ignore_errors: yes
 
     - name: Remove Docker packages

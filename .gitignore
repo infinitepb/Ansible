@@ -1,2 +1,4 @@
 inventory.ini
 test
+group_vars
+vault.pass

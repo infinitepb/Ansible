@@ -1,13 +1,15 @@
 --- 
 - hosts: localhost
   connection: local
+  vars_files:
+    - vars.yml
   tasks:
   - name: stop a instance by its ID
     amazon.aws.ec2_instance:
       state: stopped
       instance_ids:
-        - {{managednode1_id}}
-        - {{managednode2_id}}
+        - "{{managednode1_id}}"
+        - "{{managednode2_id}}"
       aws_access_key: "{{aws_access_key}}"  
       aws_secret_key: "{{aws_secret_access_key}}" 
 

@@ -1,0 +1,54 @@
+---
+- hosts: ubuntu
+  become: true
+  tasks:
+    - name: Stop Docker service
+      service:
+        name: docker
+        state: stopped
+      ignore_errors: yes
+
+    - name: Remove Docker packages
+      apt:
+        name:
+          - docker
+          - docker-engine
+          - docker.io
+          - containerd
+          - runc
+        state: absent
+        purge: yes
+        autoremove: yes
+      ignore_errors: yes
+
+    - name: Remove Docker Compose if installed
+      file:
+        path: /usr/local/bin/docker-compose
+        state: absent
+      ignore_errors: yes
+
+    - name: Remove Docker group
+      group:
+        name: docker
+        state: absent
+      ignore_errors: yes
+
+    - name: Remove Docker daemon config file
+      file:
+        path: /etc/docker/daemon.json
+        state: absent
+      ignore_errors: yes
+
+    - name: Remove Docker data directory
+      file:
+        path: /var/lib/docker
+        state: absent
+        recurse: yes
+      ignore_errors: yes
+
+    - name: Remove containerd data directory
+      file:
+        path: /var/lib/containerd
+        state: absent
+        recurse: yes
+      ignore_errors: yes

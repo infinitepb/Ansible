@@ -64,12 +64,10 @@
       file:
         path: /var/lib/docker
         state: absent
-        recurse: yes
       ignore_errors: yes
 
     - name: Remove containerd data directory
       file:
         path: /var/lib/containerd
         state: absent
-        recurse: yes
       ignore_errors: yes

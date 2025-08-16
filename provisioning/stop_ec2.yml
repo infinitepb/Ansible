@@ -6,6 +6,7 @@
   tasks:
   - name: stop a instance by its ID
     amazon.aws.ec2_instance:
+      region: "{{aws_region}}"
       state: stopped
       instance_ids:
         - "{{managednode1_id}}"
